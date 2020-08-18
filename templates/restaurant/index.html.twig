@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Restaurant index{% endblock %}
+
+{% block body %}
+    <h1>Restaurant index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Photo</th>
+                <th>Identification_number</th>
+                <th>Max_table_count</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for restaurant in restaurants %}
+            <tr>
+                <td>{{ restaurant.id }}</td>
+                <td>{{ restaurant.title }}</td>
+                <td><img src="{{ asset('uploads/photos/') ~ restaurant.photo }}" alt="photo" class="img-fluid mw-md-45px"></td>
+                <td>{{ restaurant.identificationNumber }}</td>
+                <td>{{ restaurant.maxTableCount }}</td>
+                <td>{{ restaurant.status ? 'Active' : 'Inactive' }}</td>
+                <td>
+                    <a href="{{ path('restaurant_show', {'id': restaurant.id}) }}">show</a>
+                    <a href="{{ path('restaurant_edit', {'id': restaurant.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('restaurant_new') }}">Create new</a>
+{% endblock %}

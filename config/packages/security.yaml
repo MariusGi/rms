@@ -21,9 +21,10 @@ security:
                 login_path: login
                 check_path: login
                 provider: users
+                default_target_path: '/restaurants'
             logout:
                 path: '/logout'
-                target: '/'
+                target: '/login'
 
 
             # activate different ways to authenticate

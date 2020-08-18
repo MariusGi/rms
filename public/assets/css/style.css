@@ -1,0 +1,5 @@
+@media only screen and (min-width: 768px) {
+    .mw-md-45px {
+        max-width: 45px;
+    }
+}
