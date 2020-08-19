@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\RestaurantRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,6 +43,16 @@ class Restaurant
      * @ORM\Column(type="boolean", options={"default": 0})
      */
     private $status;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Table", mappedBy="restaurant")
+     */
+    private $table;
+
+    public function __construct()
+    {
+        $this->table = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -103,6 +115,37 @@ class Restaurant
     public function setStatus(bool $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Table[]
+     */
+    public function getTable(): Collection
+    {
+        return $this->table;
+    }
+
+    public function addTable(Table $table): self
+    {
+        if (!$this->table->contains($table)) {
+            $this->table[] = $table;
+            $table->setRestaurant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTable(Table $table): self
+    {
+        if ($this->table->contains($table)) {
+            $this->table->removeElement($table);
+            // set the owning side to null (unless already changed)
+            if ($table->getRestaurant() === $this) {
+                $table->setRestaurant(null);
+            }
+        }
 
         return $this;
     }

@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @Route("/restaurants")
@@ -19,13 +20,23 @@ class RestaurantController extends AbstractController
 {
     /**
      * @Route("/", name="restaurants", methods={"GET"})
+     * @param Request $request
      * @param RestaurantRepository $restaurantRepository
+     * @param PaginatorInterface $paginator
      * @return Response
      */
-    public function index(RestaurantRepository $restaurantRepository): Response
+    public function index(Request $request, RestaurantRepository $restaurantRepository, PaginatorInterface $paginator): Response
     {
+        if ($request->query->getAlnum('filter')) {
+            $query = $restaurantRepository->findByLikeField($request->query->getAlnum('filter'));
+        } else {
+            $query = $restaurantRepository->findAll();
+        }
+
+        $result = $paginator->paginate($query);
+
         return $this->render('restaurant/index.html.twig', [
-            'restaurants' => $restaurantRepository->findAll(),
+            'restaurants' => $result,
         ]);
     }
 
@@ -65,7 +76,7 @@ class RestaurantController extends AbstractController
             $entityManager->persist($restaurant);
             $entityManager->flush();
 
-            return $this->redirectToRoute('restaurant_index');
+            return $this->redirectToRoute('restaurants');
         }
 
         return $this->render('restaurant/new.html.twig', [
@@ -100,7 +111,7 @@ class RestaurantController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('restaurant_index');
+            return $this->redirectToRoute('restaurants');
         }
 
         return $this->render('restaurant/edit.html.twig', [
@@ -123,6 +134,6 @@ class RestaurantController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('restaurant_index');
+        return $this->redirectToRoute('restaurants');
     }
 }

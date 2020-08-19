@@ -5,6 +5,18 @@
 {% block body %}
     <h1>Restaurant index</h1>
 
+    <form action="{{ path('restaurants') }}" method="get">
+        <div class="form-row align-items-center">
+            <div class="col-auto">
+                <label class="sr-only" for="filter">Name</label>
+                <input type="text" class="form-control mb-2" id="filter" name="filter" placeholder="Filter by title">
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary mb-2">Submit</button>
+            </div>
+        </div>
+    </form>
+
     <table class="table">
         <thead>
             <tr>
@@ -12,8 +24,8 @@
                 <th>Title</th>
                 <th>Photo</th>
                 <th>Identification_number</th>
-                <th>Max_table_count</th>
                 <th>Status</th>
+                <th>Max_table_count</th>
                 <th></th>
             </tr>
         </thead>
@@ -24,8 +36,8 @@
                 <td>{{ restaurant.title }}</td>
                 <td><img src="{{ asset('uploads/photos/') ~ restaurant.photo }}" alt="photo" class="img-fluid mw-md-45px"></td>
                 <td>{{ restaurant.identificationNumber }}</td>
-                <td>{{ restaurant.maxTableCount }}</td>
                 <td>{{ restaurant.status ? 'Active' : 'Inactive' }}</td>
+                <td>{{ restaurant.maxTableCount }}</td>
                 <td>
                     <a href="{{ path('restaurant_show', {'id': restaurant.id}) }}">show</a>
                     <a href="{{ path('restaurant_edit', {'id': restaurant.id}) }}">edit</a>
@@ -38,6 +50,10 @@
         {% endfor %}
         </tbody>
     </table>
+
+    <div class="navigation">
+        {{ knp_pagination_render(restaurants) }}
+    </div>
 
     <a href="{{ path('restaurant_new') }}">Create new</a>
 {% endblock %}

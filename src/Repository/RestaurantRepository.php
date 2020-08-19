@@ -47,4 +47,13 @@ class RestaurantRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findByLikeField($value)
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.title LIKE :val')
+            ->setParameter('val', '%'.$value.'%')
+            ->getQuery()
+        ;
+    }
 }

@@ -26,12 +26,14 @@
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/twig.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/twig.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/RestaurantController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RestaurantController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Restaurant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Restaurant.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/RestaurantRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/RestaurantRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/restaurant/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/restaurant/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/restaurant/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/restaurant/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/restaurant/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/restaurant/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/restaurant/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/restaurant/show.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,6 +129,9 @@
       <path value="$PROJECT_DIR$/vendor/symfony/mime" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn" />
       <path value="$PROJECT_DIR$/vendor/symfony/asset" />
+      <path value="$PROJECT_DIR$/vendor/knplabs/knp-components" />
+      <path value="$PROJECT_DIR$/vendor/knplabs/knp-paginator-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation" />
     </include_path>
   </component>
   <component name="ProjectId" id="1gEVzkE2u3BvMQQcWSmyDAoG2Jq" />
@@ -157,7 +162,9 @@
       <updated>1597680002384</updated>
       <workItem from="1597680003445" duration="6310000" />
       <workItem from="1597740815168" duration="5000" />
-      <workItem from="1597760022209" duration="14350000" />
+      <workItem from="1597760022209" duration="14430000" />
+      <workItem from="1597820242642" duration="3000" />
+      <workItem from="1597848408466" duration="14575000" />
     </task>
     <servers />
   </component>
@@ -174,15 +181,20 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="574" y="94" key="#com.intellij.ide.util.MemberChooser" timestamp="1597683835495">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="574" y="94" key="#com.intellij.ide.util.MemberChooser/1920.0.1536.824/0.0.1536.824@0.0.1536.824" timestamp="1597683835495" />
-    <state x="478" y="145" width="594" height="534" key="find.popup" timestamp="1597764200849">
+    <state x="478" y="145" width="742" height="534" key="find.popup" timestamp="1597862651553">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="478" y="145" width="594" height="534" key="find.popup/1920.0.1536.824/0.0.1536.824@0.0.1536.824" timestamp="1597764200849" />
+    <state x="478" y="145" width="742" height="534" key="find.popup/1920.0.1536.824/0.0.1536.824@0.0.1536.824" timestamp="1597862651553" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1597851279971">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/1920.0.1536.824/0.0.1536.824@0.0.1536.824" timestamp="1597851279971" />
   </component>
 </project>
