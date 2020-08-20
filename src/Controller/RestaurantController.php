@@ -13,13 +13,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
-/**
- * @Route("/restaurants")
- */
 class RestaurantController extends AbstractController
 {
     /**
-     * @Route("/", name="restaurants", methods={"GET"})
+     * @Route("/restaurants", name="restaurants", methods={"GET"})
      * @param Request $request
      * @param RestaurantRepository $restaurantRepository
      * @param PaginatorInterface $paginator
@@ -41,7 +38,7 @@ class RestaurantController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="restaurant_new", methods={"GET","POST"})
+     * @Route("/restaurant/new", name="restaurant_new", methods={"GET","POST"})
      * @param Request $request
      * @param SluggerInterface $slugger
      * @return Response
@@ -86,7 +83,7 @@ class RestaurantController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="restaurant_show", methods={"GET"})
+     * @Route("restaurant/{id}", name="restaurant_show", methods={"GET"})
      * @param Restaurant $restaurant
      * @return Response
      */
@@ -98,7 +95,7 @@ class RestaurantController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="restaurant_edit", methods={"GET","POST"})
+     * @Route("restaurant/{id}/edit", name="restaurant_edit", methods={"GET","POST"})
      * @param Request $request
      * @param Restaurant $restaurant
      * @return Response

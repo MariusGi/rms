@@ -10,13 +10,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/tables")
- */
 class TableController extends AbstractController
 {
     /**
-     * @Route("/", name="tables", methods={"GET"})
+     * @Route("/restaurant/{id}/tables", name="tables", methods={"GET"})
      * @param TableRepository $tableRepository
      * @return Response
      */
@@ -28,7 +25,7 @@ class TableController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="table_new", methods={"GET","POST"})
+     * @Route("/table/new", name="table_new", methods={"GET","POST"})
      * @param Request $request
      * @return Response
      */
@@ -53,7 +50,7 @@ class TableController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="table_show", methods={"GET"})
+     * @Route("/table/{id}", name="table_show", methods={"GET"})
      * @param Table $table
      * @return Response
      */
@@ -65,7 +62,7 @@ class TableController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="table_edit", methods={"GET","POST"})
+     * @Route("/table/{id}/edit", name="table_edit", methods={"GET","POST"})
      * @param Request $request
      * @param Table $table
      * @return Response
@@ -88,7 +85,7 @@ class TableController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="table_delete", methods={"DELETE"})
+     * @Route("/table/{id}", name="table_delete", methods={"DELETE"})
      * @param Request $request
      * @param Table $table
      * @return Response

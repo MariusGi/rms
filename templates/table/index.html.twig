@@ -9,7 +9,6 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Restaurant_id</th>
                 <th>Capacity</th>
                 <th>Number</th>
                 <th>Status</th>
@@ -20,7 +19,6 @@
         {% for table in tables %}
             <tr>
                 <td>{{ table.id }}</td>
-                <td>{{ table.restaurantId }}</td>
                 <td>{{ table.capacity }}</td>
                 <td>{{ table.number }}</td>
                 <td>{{ table.status ? 'Yes' : 'No' }}</td>

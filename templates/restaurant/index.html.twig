@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Restaurant index{% endblock %}
+{% block title %}Restaurants{% endblock %}
 
 {% block body %}
-    <h1>Restaurant index</h1>
+    <h1>Restaurants</h1>
 
     <form action="{{ path('restaurants') }}" method="get">
         <div class="form-row align-items-center">
@@ -20,7 +20,6 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Title</th>
                 <th>Photo</th>
                 <th>Identification_number</th>
@@ -32,15 +31,14 @@
         <tbody>
         {% for restaurant in restaurants %}
             <tr>
-                <td>{{ restaurant.id }}</td>
                 <td>{{ restaurant.title }}</td>
                 <td><img src="{{ asset('uploads/photos/') ~ restaurant.photo }}" alt="photo" class="img-fluid mw-md-45px"></td>
                 <td>{{ restaurant.identificationNumber }}</td>
                 <td>{{ restaurant.status ? 'Active' : 'Inactive' }}</td>
-                <td>{{ restaurant.maxTableCount }}</td>
+                <td><a href="{{ path('tables', {'id': restaurant.id}) }}">{{ restaurant.maxTableCount }}</a></td>
                 <td>
-                    <a href="{{ path('restaurant_show', {'id': restaurant.id}) }}">show</a>
-                    <a href="{{ path('restaurant_edit', {'id': restaurant.id}) }}">edit</a>
+                    <a class="btn btn-primary" href="{{ path('restaurant_edit', {'id': restaurant.id}) }}">edit</a>
+                    {{ include('restaurant/_delete_form.html.twig') }}
                 </td>
             </tr>
         {% else %}
@@ -55,5 +53,5 @@
         {{ knp_pagination_render(restaurants) }}
     </div>
 
-    <a href="{{ path('restaurant_new') }}">Create new</a>
+    <a class="btn btn-primary" href="{{ path('restaurant_new') }}">Create new</a>
 {% endblock %}
