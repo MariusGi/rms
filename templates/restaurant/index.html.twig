@@ -22,9 +22,9 @@
             <tr>
                 <th>Title</th>
                 <th>Photo</th>
-                <th>Identification_number</th>
+                <th>Identification number</th>
                 <th>Status</th>
-                <th>Max_table_count</th>
+                <th>Count of active tables</th>
                 <th></th>
             </tr>
         </thead>
@@ -35,7 +35,8 @@
                 <td><img src="{{ asset('uploads/photos/') ~ restaurant.photo }}" alt="photo" class="img-fluid mw-md-45px"></td>
                 <td>{{ restaurant.identificationNumber }}</td>
                 <td>{{ restaurant.status ? 'Active' : 'Inactive' }}</td>
-                <td><a href="{{ path('tables', {'id': restaurant.id}) }}">{{ restaurant.maxTableCount }}</a></td>
+                <td><a href="{{ path('tables', {'id': restaurant.id}) }}">{% if restaurant.countOfActiveTables %}
+                        {{ restaurant.countOfActiveTables }}{% else %}0{% endif %}</a></td>
                 <td>
                     <a class="btn btn-primary" href="{{ path('restaurant_edit', {'id': restaurant.id}) }}">edit</a>
                     {{ include('restaurant/_delete_form.html.twig') }}

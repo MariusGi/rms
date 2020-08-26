@@ -15,24 +15,31 @@ class TableController extends AbstractController
     /**
      * @Route("/restaurant/{id}/tables", name="tables", methods={"GET"})
      * @param TableRepository $tableRepository
+     * @param $id
      * @return Response
      */
-    public function index(TableRepository $tableRepository): Response
+    public function index(TableRepository $tableRepository, $id): Response
     {
         return $this->render('table/index.html.twig', [
-            'tables' => $tableRepository->findAll(),
+            'tables' => $tableRepository->findBy(
+                ['restaurant' => $id]
+            ),
+            'id' => $id,
         ]);
     }
 
     /**
-     * @Route("/table/new", name="table_new", methods={"GET","POST"})
+     * @Route("/restaurant/{id}/table/new", name="table_new", methods={"GET","POST"})
      * @param Request $request
+     * @param $id
      * @return Response
      */
-    public function new(Request $request): Response
+    public function new(Request $request, $id): Response
     {
         $table = new Table();
-        $form = $this->createForm(TableType::class, $table);
+        $form = $this->createForm(TableType::class, $table, [
+            'restaurant_id' => $id,
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -40,24 +47,29 @@ class TableController extends AbstractController
             $entityManager->persist($table);
             $entityManager->flush();
 
-            return $this->redirectToRoute('tables');
+            return $this->redirectToRoute('tables', [
+                'id' => $id,
+            ]);
         }
 
         return $this->render('table/new.html.twig', [
             'table' => $table,
             'form' => $form->createView(),
+            'id' => $id,
         ]);
     }
 
     /**
      * @Route("/table/{id}", name="table_show", methods={"GET"})
      * @param Table $table
+     * @param $id
      * @return Response
      */
-    public function show(Table $table): Response
+    public function show(Table $table, $id): Response
     {
         return $this->render('table/show.html.twig', [
             'table' => $table,
+            'id' => $id,
         ]);
     }
 

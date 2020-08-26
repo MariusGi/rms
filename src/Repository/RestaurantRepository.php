@@ -51,9 +51,53 @@ class RestaurantRepository extends ServiceEntityRepository
     public function findByLikeField($value)
     {
         return $this->createQueryBuilder('r')
-            ->andWhere('r.title LIKE :val')
+            ->select(
+                'r.id,
+                r.title,
+                r.photo,
+                r.identification_number as identificationNumber,
+                r.status,
+                SUM(t.status) as countOfActiveTables'
+            )
+            ->where('r.title LIKE :val')
             ->setParameter('val', '%'.$value.'%')
+            ->leftJoin('r.table', 't')
+            ->groupBy('r.id')
             ->getQuery()
+            ->getResult()
         ;
+    }
+
+    public function findAllAddTableCount()
+    {
+        return $this->createQueryBuilder('r')
+            ->select(
+                'r.id,
+                r.title,
+                r.photo,
+                r.identification_number as identificationNumber,
+                r.status,
+                SUM(t.status) as countOfActiveTables'
+            )
+            ->leftJoin('r.table', 't')
+            ->groupBy('r.id')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function getTableCountByRestaurantId($restaurantId)
+    {
+        return $this->createQueryBuilder('r')
+            ->select(
+                'SUM(t.status) as countOfActiveTables'
+            )
+            ->where('r.id = :restaurantId')
+            ->setParameter('restaurantId', $restaurantId)
+            ->leftJoin('r.table', 't')
+            ->groupBy('r.id')
+            ->getQuery()
+            ->getResult()
+            ;
     }
 }

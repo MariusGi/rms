@@ -35,6 +35,7 @@ class Table
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Restaurant", inversedBy="table")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $restaurant;
 

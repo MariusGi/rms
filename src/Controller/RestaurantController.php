@@ -22,15 +22,20 @@ class RestaurantController extends AbstractController
      * @param PaginatorInterface $paginator
      * @return Response
      */
-    public function index(Request $request, RestaurantRepository $restaurantRepository, PaginatorInterface $paginator): Response
+    public function index(Request $request, RestaurantRepository $restaurantRepository,
+                          PaginatorInterface $paginator): Response
     {
         if ($request->query->getAlnum('filter')) {
             $query = $restaurantRepository->findByLikeField($request->query->getAlnum('filter'));
         } else {
-            $query = $restaurantRepository->findAll();
+            $query = $restaurantRepository->findAllAddTableCount();
         }
 
-        $result = $paginator->paginate($query);
+        $result = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            5
+        );
 
         return $this->render('restaurant/index.html.twig', [
             'restaurants' => $result,
@@ -98,17 +103,24 @@ class RestaurantController extends AbstractController
      * @Route("restaurant/{id}/edit", name="restaurant_edit", methods={"GET","POST"})
      * @param Request $request
      * @param Restaurant $restaurant
+     * @param RestaurantRepository $restaurantRepository
+     * @param $id
      * @return Response
      */
-    public function edit(Request $request, Restaurant $restaurant): Response
+    public function edit(Request $request, Restaurant $restaurant, RestaurantRepository $restaurantRepository, $id): Response
     {
         $form = $this->createForm(RestaurantType::class, $restaurant);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('restaurants');
+
+            $query = $restaurantRepository->getTableCountByRestaurantId($id);
+            if ($restaurant->getMaxTableCount() >= $query[0]['countOfActiveTables']) {
+                $this->getDoctrine()->getManager()->flush();
+
+                return $this->redirectToRoute('restaurants');
+            }
         }
 
         return $this->render('restaurant/edit.html.twig', [
